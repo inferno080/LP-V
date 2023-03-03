@@ -31,7 +31,5 @@ java AddClient 127.0.0.1 8 9
 ```
 15. The output should be :
 ```
-The first number is : 8
-The second number is : 9
-The sum is : 17.0
-```
+8.0 + 9.0 = 17.0
+``` 
