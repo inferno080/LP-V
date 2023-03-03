@@ -31,5 +31,5 @@ java AddClient 127.0.0.1 8 9
 ```
 15. The output should be :
 ```
-8.0 + 9.0 = 17.0
+8.0 + 9.0 = 17.0 
 ``` 
