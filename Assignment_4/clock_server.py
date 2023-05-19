@@ -2,7 +2,7 @@
 
 from dateutil.parser import parse
 from threading import Thread
-from datetime import datetime
+from datetime import datetime, timedelta
 from socket import socket, SO_REUSEADDR, SOL_SOCKET
 import time
 
@@ -49,7 +49,7 @@ def getAverageClockDiff():
 
 	time_difference_list = list(client['time_difference']for client_addr, client in client_data.items())	
 
-	sum_of_clock_difference = sum(time_difference_list, datetime.timedelta(0, 0))
+	sum_of_clock_difference = sum(time_difference_list, timedelta(0, 0))
 
 	average_clock_difference = sum_of_clock_difference / len(client_data)
 
