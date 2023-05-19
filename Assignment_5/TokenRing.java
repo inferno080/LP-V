@@ -1,40 +1,51 @@
 import java.util.Scanner;
 
-class TokenRing {
-    public static void main(String[] args) throws Throwable{    
-        System.out.println("Enter the number of processes ");
+public class TokenRing 
+{
+    public static void main(String args[]) throws Throwable
+    {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter n : ");
+        System.out.println("Enter number of processes : ");
         int n = sc.nextInt();
-        int token = 0;
-        int ch = 1;
-        int sender, reciever;
-        String message;
-        boolean message_pass = false;
-        System.out.println("Initializing ring");
-        for(int i = 0; i < n; i++) {
-            System.out.println(" " + i);                        
+        System.out.println("Initializing ring ...");
+        for (int i=0; i<n; i++)
+        {
+            System.out.print(i + "\t");
         }
-        System.out.println("Enter sender : ");
-        sender = sc.nextInt();
-        System.out.println("Enter reciever : ");
-        reciever = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Enter message : ");
-        message = sc.nextLine();
-        for(token = 0; token < n; token++) {
-            System.out.println("Token at process " + token);
-            if(token == sender) {
-                System.out.println("Sender found");
-                System.out.println("Attaching message");  
-                message_pass = true;              
-            } else if (token == reciever) {
-                System.out.println("Token arrived at reciever");
-                System.out.println("Message " + message + " recieved");
-                message_pass = false;                
+        System.out.println();
+        boolean message_pass = false;
+        System.out.println("Enter Sender : ");
+        int sender = sc.nextInt();
+        System.out.println("Enter Reciever : ");
+        int reciever = sc.nextInt();
+        for(int token =0; token<=n; token++)
+        {
+            System.out.println("Token at Process : " + token);
+            if(token == sender)
+            {
+                if(!message_pass)
+                {
+                    message_pass = true;
+                    System.out.println("Message Sent");
+                }
+                else
+                {
+                    System.out.println("Reciever not found");
+                    return;
+                }
             }
-            if(message_pass) {
-                System.out.println(token + " passing message " + message + " to " + (token + 1)%n);
+            if(token == reciever)
+            {
+                if(message_pass)
+                {
+                    message_pass = false;
+                    System.out.println("Message Recieved");
+                    break;
+                }
+            }
+            if(token == n-1)
+            {
+                token = -1;
             }
         }
     }
