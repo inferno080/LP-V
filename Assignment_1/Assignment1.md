@@ -16,14 +16,14 @@ rmic AddServerImplementation
 rmiregistry
 ```
 7. Leave the first terminal window open and create a new folder called 'server'.
-8. Copy and Paste - ```AddServer.class```, ```AddServerImplementation.class```,  ```AddServerInterface.class```, ```AddServerImplementation_Stub.class``` in that folder.
+8. Copy and Paste - ```AddServer.java```, ```AddServerImplementation.java```,  ```AddServerInterface.java```, ```AddServerImplementation_Stub.class``` in that folder.
 9. Open the 'server' folder in a new terminal window.
 10. Run the command :
 ```
 java AddServer
 ```
 11. Leave the second terminal window open and create a new folder called 'client'.
-12. Copy and Paste - ```AddClient.class```,  ```AddServerInterface.class```, ```AddServerImplementation_Stub.class``` in that folder.
+12. Copy and Paste - ```AddClient.java```,  ```AddServerInterface.java```, ```AddServerImplementation_Stub.class``` in that folder.
 13. Open the 'client' folder in a new terminal window.
 14. Run the command :
 ```
