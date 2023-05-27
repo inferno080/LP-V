@@ -5,7 +5,6 @@ import ReverseModule.Reverse;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NameComponent;
-
 class ReverseServer
 {
 	public static void main(String[] args){
