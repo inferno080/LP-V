@@ -19,4 +19,4 @@ cd Downloads/glassfish5/bin
 ## Assignment
 
 1. Create a new Java Maven Project -> Web Application
-<img src="/Images/Screenshot 2023-05-28 at 4.22.28 PM.png"/>
+<img src="./Images/Screenshot 2023-05-28 at 4.22.28 PM.png"/>
