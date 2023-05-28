@@ -1,6 +1,6 @@
 # Steps to Follow :
 
-## Installations 
+## Installations [HUGE HEADACHE - DOESN'T WORK FOR EVERYONE]
 
 ```
 sudo su
@@ -54,3 +54,7 @@ systemctl start glassfish
 
 1. Create a new Java Maven Project -> Web Application
 <img src="./Images/Screenshot 2023-05-28 at 4.22.28 PM.png"/>
+2. Click 'Next' and wait for an outrageous amount of time. Rename the project to 'mycalci'
+<img src="./Images/Screenshot 2023-05-28 at 5.14.06 PM.png"/>
+3. Click 'Next'. Click on 'Add' button and select 'Glassfish Server'
+<img src="./Images/Screenshot 2023-05-28 at 5.17.26 PM.png"/>
