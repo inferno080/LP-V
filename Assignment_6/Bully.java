@@ -2,156 +2,180 @@ import java.util.Scanner;
 
 public class Bully 
 {
-    int n, inactive_count;
     int coordinator;
-    boolean loss = false;
-    boolean[] process_state;
-
-    public Bully(int n)
+    boolean[] process_states;
+    int n;
+    Bully (int n)
     {
         this.n = n;
-        this.inactive_count = 0;
-        this.process_state = new boolean[n];
+        this.coordinator = n-1;
+        this.process_states = new boolean[n];
         for(int i=0; i<n; i++)
         {
-            this.process_state[i] = true;
+            this.process_states[i] = true;
         }
+        System.out.println("Processes have been initialized \nCurrent co-ordinator is : "+coordinator);
+        showAll();
     }
 
-    public void up(int x)
+    void activate(int x)
     {
-        if(x < 0 || x >= n)
+        if(x>=0 && x<n)
         {
-            System.out.println("Process doesn't exist\n");
-            return;
-        }
-        if(process_state[x])
-        {
-            System.out.println("Process already active\n");
+            if(process_states[x])
+            {
+                System.out.println("Process already active");
+            }
+            else
+            {
+                this.process_states[x] = true;
+                System.out.println("Process activated");
+                election(x);
+            }
         }
         else
         {
-            process_state[x] = !process_state[x];
-            System.out.println("Process "+x+" activated\n");
-            System.out.println("Process "+x+" held election\n");
-            for(int i=x+1; i<n; i++)
+            System.out.println("Enter a valid process");
+        }
+    }
+
+    void deactivate(int x)
+    {
+        if(x>=0 && x<n)
+        {
+            if(!process_states[x])
             {
-                System.out.println("Election message sent from proceess "+ x+ " to process "+(i)+"\n");
+                System.out.println("Process already inactive");
             }
-            for(int i=n-1; i>x; i--)
+            else
             {
-                if(process_state[i])
+                this.process_states[x] = false;
+                System.out.println("Process deactivated");
+            }
+        }
+        else
+        {
+            System.out.println("Enter a valid process");
+        }
+    }
+
+    void showAll()
+    {
+        for(int i=0; i<n; i++)
+        {
+            System.out.println(i+" | "+(process_states[i]?"active":"inactive"));
+        }
+    }
+
+    void election(int x)
+    {
+        int temp = -1;
+        if(x>=0 && x<n && process_states[x])
+        {
+            if(x+1 != n)
+            {
+                int iterator = x+1;
+                while(iterator != n)
                 {
-                    System.out.println("Alive message sent from "+i +" to "+x+"\n");
-                    coordinator = i;
-                    loss = true;
-                    System.out.println(x+" Lost election "+" to "+i+"\n");
-                    break;
+                    System.out.println("Election message sent to : "+iterator);
+                    if(process_states[iterator])
+                    {
+                        System.out.println("Response recieved from : "+iterator);
+                        if(iterator > temp)
+                        {
+                            temp = iterator;
+                        }
+                    }
+                    iterator++;
+                }
+                this.coordinator = temp;
+            }
+            else
+            {
+                if(x > coordinator)
+                {
+                    this.coordinator = x;
                 }
             }
-            if(!loss)
-            {
-                System.out.println ("New coordinator : "+ x);
-                this.coordinator = x;
-            }
-        }
-    }
-
-    public  void down(int x)
-    {
-        if(x < 0 || x >= n)
-        {
-            System.out.println("Process doesn't exist\n");
-            return;
-        }
-        if(!process_state[x])
-        {
-            System.out.println("process "+x+" is already dowm.\n");
+            System.out.println("New Co-ordintor is : "+ coordinator);
         }
         else
         {
-            process_state[x] = false;
+            System.out.println("Enter a valid process");
         }
     }
 
-    public void message(int x)
+    void ping(int x)
     {
-        if(x < 0 || x >= n)
+        if(x>=0 && x<n && process_states[x])
         {
-            System.out.println("Process doesn't exist\n");
-            return;
-        }
-        if(!process_state[coordinator])
-        {
-            System.out.println("Coordinator didn't respond \n");
-            System.out.println("Process "+x+" held election \n");
-            for(int i=x+1; i<n; i++)
+            if(process_states[coordinator])
             {
-                System.out.println("Election message sent from proceess "+ x+ " to process "+(i)+"\n");
+                System.out.println("Response Recieved from "+coordinator);
             }
-            for(int i=n-1; i>x; i--)
+            else
             {
-                if(process_state[i])
-                {
-                    System.out.println("Alive message sent from "+i +" to "+x+"\n");
-                    coordinator = i;
-                    loss = true;
-                    System.out.println(i +" Lost election "+" to "+x+"\n");
-                    break;
-                }
-            }
-            if(!loss)
-            {
-                System.out.println ("New coordinator : "+ x);
-                this.coordinator = x;
+                election(x);
             }
         }
         else
         {
-            System.out.println("Message Sent Successfully");
+            System.out.println("Enter a valid process");
         }
     }
 
-    public static void main(String[] args)
+    public static void main(String args[]) 
     {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Number of processes : \n");
+        System.out.println("Enter the number of processes : ");
         int n = sc.nextInt();
-        int c = 0, i;
-        Bully x = new Bully(n);
-        while(c!=4)
+        int c,x;
+        Bully r = new Bully(n);
+        while(true)
         {
-            System.out.println("=======================");
-            System.out.println("1. Deactivate a process");
-            System.out.println("2. Activate a process");
-            System.out.println("3. Send Message");
-            System.out.println("=======================");
-            System.out.println("Enter Choice : ");
-            c = sc.nextInt();
-            switch(c)
+            System.out.println("=============================");
+            System.out.println("1. Activate a Process");
+            System.out.println("2. DeActivate a Process");
+            System.out.println("3. View Process States");
+            System.out.println("4. Election");
+            System.out.println("5. Ping Co-ordinator");
+            System.out.println("=============================");
+            System.out.println("Enter Choice :");
+            c =  sc.nextInt();
+            if(c == 1)
             {
-                case 1:
-                {
-                    System.out.println("Enter Process ID : ");
-                    i = sc.nextInt();
-                    x.down(i);
-                    break;
-                }
-                case 2:
-                {
-                    System.out.println("Enter Process ID : ");
-                    i = sc.nextInt();
-                    x.up(i);
-                    break;
-                }
-                case 3:
-                {
-                    System.out.println("Enter Process ID : ");
-                    i = sc.nextInt();
-                    x.message(i);
-                    break;
-                }
+                System.out.println("Enter Process ID:");
+                x =  sc.nextInt();
+                r.activate(x);
+            }
+            else if(c == 2)
+            {
+                System.out.println("Enter Process ID:");
+                x =  sc.nextInt();
+                r.deactivate(x);
+            }
+            else if(c == 3)
+            {
+                r.showAll();
+            }
+            else if(c == 4)
+            {
+                System.out.println("Enter Process ID that will call the election :");
+                x =  sc.nextInt();
+                r.election(x);
+            }
+            else if(c == 5)
+            {
+                System.out.println("Enter Process ID that will ping the coordinator :");
+                x =  sc.nextInt();
+                r.ping(x);
+            }
+            else
+            {
+                System.out.println("Invalid Choice");
             }
         }
+
     }
+
 }
