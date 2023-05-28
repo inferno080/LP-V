@@ -1,7 +1,5 @@
 import mpi.MPI;
-
 import java.util.Scanner;
-
 import mpi.*;
 
 public class ScatterGather {
