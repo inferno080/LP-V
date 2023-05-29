@@ -1,0 +1,7 @@
+module ConcatModule
+{
+    interface Concat
+    {
+        string concat_strings(in string s1, in string s2);
+    };
+};

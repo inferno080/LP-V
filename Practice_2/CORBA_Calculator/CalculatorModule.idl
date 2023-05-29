@@ -1,0 +1,10 @@
+module CalculatorModule
+{
+    interface Calculator
+    {
+        long add(in long x, in long y);
+        long sub(in long x, in long y);
+        long div(in long x, in long y);
+        long mul(in long x, in long y);
+    };
+};
