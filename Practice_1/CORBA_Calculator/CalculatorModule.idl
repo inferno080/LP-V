@@ -1,0 +1,7 @@
+module CalculatorModule
+{
+    interface Calculator
+    {
+        long add(in long x,in long y);
+    };
+};
